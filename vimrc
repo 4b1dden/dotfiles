@@ -27,9 +27,6 @@ filetype plugin indent on
 
 set formatoptions-=cro " stop newline continuation of comments
 
-" language specific
-" run rustfmt on buffer save
-let g:rustfmt_autosave = 1
 
 "-------- GENERAL SETTINGS END 
 
@@ -37,7 +34,6 @@ let g:rustfmt_autosave = 1
 
 call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/plenary.nvim'                    " we need this for telescope
-
   Plug 'nvim-telescope/telescope.nvim'            " live grep and file lookup
 
   Plug 'gruvbox-community/gruvbox'                " gruvbox theme
@@ -57,11 +53,15 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'jiangmiao/auto-pairs'                     " auto pairs
 
+  Plug 'tpope/vim-surround'                       " surround
+                                        
   Plug 'junegunn/vim-easy-align'                  " easy align
 
   Plug 'luxed/ayu-vim'                            " maintained ayu fork colorscheme
 
   Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main'  }
+
+  Plug 'junegunn/goyo.vim'                        " prose mode
 call plug#end()
 
 "-------- CUSTOM PLUGINS END
@@ -171,4 +171,34 @@ noremap <Leader>y "*y
 
 "-------- REMAPS END 
 
-let g:python_highlight_space_errors = 0
+"-------- LANGUAGE SPECIFIC START
+
+" python
+let g:python_highlight_space_errors                 = 0
+
+" markdown
+autocmd FileType markdown let b:coc_suggest_disable = 1 " disable autosuggest in md files
+
+
+" rust 
+let g:rustfmt_autosave                              = 1
+
+"-------- LANGUAGE SPECIFIC END
+" set guicursor=i:ver25-iCursor " if you want to have a vertical line cursor
+" in insert mode
+
+" ------- CUSTOM FUNCTIONALITY
+
+" add custom bindings for goyo prose mode
+function! s:goyo_enter()
+  set nolist noshowmode noshowcmd
+endfunction
+
+function! s:goyo_leave()
+  set list showmode showcmd
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+nmap \pr :Goyo<CR>
+
