@@ -1,0 +1,5 @@
+require("kiko.options")
+require("kiko.colors")
+require("kiko.plugins")
+require("kiko.lsp")
+require("kiko.remaps")
