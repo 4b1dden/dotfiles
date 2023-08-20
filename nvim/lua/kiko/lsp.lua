@@ -37,7 +37,6 @@ lsp.on_attach(function(_client, bufnr)
     vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
 end)
--- vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, default_remap_opts)
 -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, default_remap_opts)
 -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, default_remap_opts)
 -- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, default_remap_opts)
@@ -46,6 +45,24 @@ end)
 vim.cmd([[
 ino <silent><expr> <CR> pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 ]])
+
+local should_show_virtual_text = false
+local toggle_virtual_text_diagnostics = function()
+    should_show_virtual_text = not should_show_virtual_text
+    vim.diagnostic.config({ virtual_text = should_show_virtual_text })
+end
+vim.keymap.set('n', '<leader>dd', toggle_virtual_text_diagnostics)
+
+local diagnostics_active = true
+local toggle_diagnostics = function()
+    diagnostics_active = not diagnostics_active
+    if diagnostics_active then
+        vim.diagnostic.show()
+    else
+        vim.diagnostic.hide()
+    end
+end
+vim.keymap.set('n', '<leader>dx', toggle_diagnostics)
 
 -- format on save?
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]

@@ -19,6 +19,7 @@ vim.keymap.set('n', 'k', 'gk', { silent = true })
 
 -- use <leader>y to indicate yank will go the system clipboard
 vim.keymap.set('n', '<leader>y', '"*y', default_remap_opts)
+vim.keymap.set('v', '<leader>y', '"*y', default_remap_opts)
 
 -- move stuff around
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", default_remap_opts)
