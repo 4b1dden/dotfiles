@@ -35,6 +35,8 @@ return require('packer').startup(function(use)
 
     use 'Shatur/neovim-ayu' -- ayu theme
 
+    use "catppuccin/nvim" -- catppuccin
+
     use 'ray-x/go.nvim'
     -- use 'mg979/vim-visual-multi'
 
