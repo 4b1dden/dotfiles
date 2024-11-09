@@ -18,7 +18,9 @@ zcomet load ohmyzsh lib/history.zsh lib/directories.zsh lib/completion.zsh lib/t
 zcomet load zsh-users/zsh-completions
 zcomet load zdharma-continuum/fast-syntax-highlighting
 zcomet load zsh-users/zsh-autosuggestions
-zcomet load romkatv/powerlevel10k
+
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # The following lines were added by compinstall
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==32=00}:${(s.:.)LS_COLORS}")'
@@ -69,3 +71,7 @@ export FZF_DEFAULT_OPTS="--height 70% --reverse --info=inline --multi --preview-
 # START ALIASES
 alias vi=nvim
 alias vim=nvim
+
+sudo systemctl enable keyd
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/powerlevel10k/powerlevel10k.zsh-theme
