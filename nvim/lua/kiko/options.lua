@@ -15,7 +15,8 @@ vim.opt.splitright = true -- vertical splits will automatically be to the right
 
 vim.opt.swapfile = false -- keeping history as per recs (i think from Primeagen)
 vim.opt.backup = false
-vim.opt.undodir = "~/.vim/undodir"
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+-- vim.opt.undodir = "~/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.scrolloff = 8 -- always keeps 8 lines in the bottom
